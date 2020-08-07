@@ -1,3 +1,10 @@
+
+################
+#based of :
+#https://medium.com/@shikendon/build-an-icecast-streaming-server-on-heroku-using-docker-ac3492b554f0
+
+################
+
 #install Docker for ubuntu 18.04 from https://linuxize.com/post/how-to-install-and-use-docker-on-ubuntu-18-04/
 
 sudo apt update
