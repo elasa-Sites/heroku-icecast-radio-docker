@@ -16,5 +16,6 @@ RUN  cd heroku-icecast-radio-docker
 CMD [chmod 755 *]
 CMD ["/test-2-by-docker.sh"] "./test-2-by-docker.sh"
 ADD ./test-2-by-docker.sh /test-2-by-docker.sh
-ADD ./etc /etc
+#ADD ./etc /etc
+
 
