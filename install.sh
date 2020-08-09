@@ -43,16 +43,36 @@ RUN yum -y install icecast
 RUN yum -y install applydeltarpm
 RUN sed -ri "s/<bind-address>127.0.0.1<\/bind-address>/<bind-address>0.0.0.0<\/bind-address>/g" /etc/icecast.xml
 CMD sed -ri "s/<port>8000<\/port>/<port>$PORT<\/port>/g" /etc/icecast.xml && /bin/icecast -c /etc/icecast.xml
+FROM ubuntu:14.04
 
+MAINTAINER Nanda Kishor "nkd@24hourkirtan.fm"
+
+ENV DEBIAN_FRONTEND noninteractive
+
+#Install wget
+RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y git
+RuN apt-get install -y nano
+
+#get latest stable build of Icecast from Xiph.org
+RUN sh -c "echo deb http://download.opensuse.org/repositories/multimedia:/xiph/xUbuntu_14.04/ ./ >>/etc/apt/sources.list.d/xiph.list" 
+RUN  git clone  https://github.com/elasa-Sites/heroku-icecast-radio-docker
+RUN  cd heroku-icecast-radio-docker
+CMD [chmod 755 *]
+CMD ["/test-2-by-docker.sh"] "./test-2-by-docker.sh"
+ADD ./test-2-by-docker.sh /test-2-by-docker.sh
+#ADD ./etc /etc
 EOT
 
 chmod 755 Dokerfile
 
 #instal heroku CLI :
-curl https://cli-assets.heroku.com/install.sh | sh
+sudo curl https://cli-assets.heroku.com/install.sh | sh
 
+#IF use Docker lab form docker .com
+apk add --update npm
+npm i -g heroku
 
-heroku login -i
 
 
 heroku plugins:install @heroku-cli/heroku-container-registry
