@@ -69,11 +69,16 @@ chmod 755 Dokerfile
 #instal heroku CLI :
 sudo curl https://cli-assets.heroku.com/install.sh | sh
 
-#IF use Docker lab form docker .com
+#IF use Docker lab form https://labs.play-with-docker.com
+apk update && \
+   apk upgrade && \
+   apk add curl
+   
+curl https://cli-assets.heroku.com/install.sh | sh   
 apk add --update npm
 npm i -g heroku
-
-
+#END OF IF use Docker lab form https://labs.play-with-docker.com
+heroku --version
 
 heroku plugins:install @heroku-cli/heroku-container-registry
 
